@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Button,} from 'react-native';
-import Buttons from './assets/HomeScreen';
+import ButtonComponent from './assets/HomeScreen';
 
 export default function App() {
   return (
     <View style={styles.container}> 
 
-  <Buttons />
+  <ButtonComponent />
 
 
     </View>

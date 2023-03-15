@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Button,} from 'react-native';
-import ButtonComponent from './assets/HomeScreen';
+import ButtonComponent from './components/HomeScreen';
 
 export default function App() {
   return (

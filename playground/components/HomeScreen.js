@@ -1,59 +1,41 @@
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native';
-
-const ButtonComponent = () => {
-  const { width } = Dimensions.get('window');
-  const buttonWidth = width / 2; // Buttons nehmen die Hälfte der Bildschirmbreite ein
-  return (
-    <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-          <Text style={styles.buttonText}>Favoriten</Text>
-        </TouchableOpacity>
-        <View style={styles.spacing} />
-        <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-          <Text style={styles.buttonText}>Charactere</Text>
-        </TouchableOpacity>
-        <View style={styles.spacing} />
-        <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-          <Text style={styles.buttonText}>Zivilisten</Text>
-        </TouchableOpacity>
-        <View style={styles.spacing} />
-        <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-          <Text style={styles.buttonText}>Sprecher</Text>
-        </TouchableOpacity>
-        <View style={styles.spacing} />
-        <TouchableOpacity style={[styles.button, { width: buttonWidth }]}>
-          <Text style={styles.buttonText}>Sonstiges</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  buttonContainer: {
-    width: '100%',
-    alignItems: 'center',
-  },
-  button: {
-    height: 60,
-    backgroundColor: 'blue',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-  },
-  spacing: {
-    height: 10,
-  },
-});
-
-export default ButtonComponent;
+    /**
+     * Sample React Native App
+     * https://instamobile.io
+     *
+     * @format
+     * @flow strict-local
+     */
+    import React from 'react';
+    import {View, Button} from 'react-native';
+    import {launchImageLibrary} from 'react-native-image-picker';
+    const CompressionTest = () => {
+      const openImageLibrary = () => {
+        launchImageLibrary(
+          {
+            mediaType: 'photo',
+          },
+          (response) => {
+            compressVideo(response.uri);
+          },
+        );
+      };
+      const compressVideo = (sourceUri) => {
+        console.log('  compressVideo  ++++', sourceUri);
+        RNFFmpeg.execute(`-i ${sourceUri} -c:v mpeg4 resultimage.\mp4`).then(
+          (result) => {
+            console.log(result);
+          },
+        );
+      };
+      return (
+        <View style={styles.container}>
+          <Button onPress={openImageLibrary} title="Pick Image" color="#841584" />
+        </View>
+      );
+    };
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+      },
+    });
+    export default CompressionTest;
